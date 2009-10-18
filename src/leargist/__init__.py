@@ -1,12 +1,9 @@
 import os
-from ctypes import CFUNCTYPE
 from ctypes import POINTER
 from ctypes import pointer
 from ctypes import Structure
 from ctypes import c_float
 from ctypes import c_int
-from ctypes import c_longlong
-from ctypes import c_void_p
 import numpy as np
 
 leargist_folder = os.path.abspath(__file__).rsplit(os.path.sep, 1)[0]
@@ -27,10 +24,14 @@ libleargist.color_gist_scaletab.argtypes = (
 libleargist.color_gist_scaletab.returntype = POINTER(c_float)
 
 def color_gist(im, nblocks=4, orientations=(8, 8, 4)):
+    """Compute the GIST descriptor of an RGB image"""
     scales = len(orientations)
-    if scales > 50:
-        raise ValueError("lear_gist supportsmaximum 50 scales")
     orientations = np.array(orientations, dtype=np.int32)
+
+    # check minimum image size
+    if im.size[0] < 8 or im.size[1] < 8:
+        raise ValueError(
+            "image size should at least be (8, 8), got %r" % (im.size,))
 
     # ensure the image is encoded in RGB
     im = im.convert(mode='RGB')
@@ -38,7 +39,8 @@ def color_gist(im, nblocks=4, orientations=(8, 8, 4)):
     # build the lear_gist color image C datastructure
     arr = np.fromstring(im.tostring(), np.uint8)
     arr.shape = list(im.size) + [3]
-    arr = np.ascontiguousarray(arr.transpose(2,0,1))
+    arr = arr.transpose(2, 0, 1)
+    arr = np.ascontiguousarray(arr, dtype=np.float32)
 
     gci = GistColorImage(
         im.size[0],
@@ -47,7 +49,9 @@ def color_gist(im, nblocks=4, orientations=(8, 8, 4)):
         arr[1].ctypes.data_as(POINTER(c_float)),
         arr[2].ctypes.data_as(POINTER(c_float)))
 
-    libleargist.color_gist_scaletab(
+    descriptors = c_float * (nblocks * nblocks * orientations.sum() * 3)
+    addr= libleargist.color_gist_scaletab(
         pointer(gci), nblocks, scales,
         orientations.ctypes.data_as(POINTER(c_int)))
+    return np.ctypeslib.as_array(descriptors.from_address(addr))
 
