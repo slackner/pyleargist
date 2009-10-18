@@ -21,7 +21,7 @@ Install
 -------
 
 Install libfftw3 with development headers (http://www.fftw.org), python dev
-headers, gcc and the Python Imaging Library and numpy.
+headers, gcc, the Python Imaging Library (PIL) and numpy.
 
 Build locally for testing::
 
@@ -33,13 +33,34 @@ Build and install system wide::
   % python setup.py build
   % sudo python setup.py install
 
+
 Usage
 -----
 
-TODO
-
-::
+Here is a sample session in  a python shell once the library is installed::
 
   >>> from PIL import Image
   >>> import leargist
+
+  >>> im = Image.open('lear_gist/ar.ppm')
+  >>> descriptors = leargist.color_gist(im)
+
+  >>> descriptors.shape
+  (960,)
+
+  >>> descriptors.dtype
+  dtype('float32')
+
+  >>> descriptors[:4]
+  array([ 0.05786307,  0.19255637,  0.09331483,  0.06622448], dtype=float32)
+
+
+The GIST descriptors (fixed size, 960 by default) can then be used as an
+euclidian space to cluster images based on their content.
+
+This dimension can then be reduced to a 32 or 64 bits semantic hash by using
+Locality Sensitive Hashing, Spectral Hashing or Stacked Denoising Autoencoders.
+
+A sample implementation of picture semantic hashing with SDAs is showcased in
+the libsgd library: http://code.oliviergrisel.name/libsgd
 
