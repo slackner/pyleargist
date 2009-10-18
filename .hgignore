@@ -1,0 +1,14 @@
+syntax: glob
+*.pyc
+*.so
+*.o
+*.swp
+*.swo
+*.egg-info
+eggs/*
+dist/*
+build/*
+include/*
+.coverage
+debug
+lear_gist/compute_gist
