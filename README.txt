@@ -64,3 +64,10 @@ Locality Sensitive Hashing, Spectral Hashing or Stacked Denoising Autoencoders.
 A sample implementation of picture semantic hashing with SDAs is showcased in
 the libsgd library: http://code.oliviergrisel.name/libsgd
 
+Changes
+-------
+
+- 1.0.1: 2009/10/10 - added missing missing MANIFEST
+
+- 1.0.0: 2009/10/10 - initial release
+
