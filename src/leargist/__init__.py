@@ -4,6 +4,7 @@ from ctypes import pointer
 from ctypes import Structure
 from ctypes import c_float
 from ctypes import c_int
+from ctypes import c_void_p
 import numpy as np
 
 leargist_folder = os.path.abspath(__file__).rsplit(os.path.sep, 1)[0]
@@ -21,7 +22,7 @@ class GistColorImage(Structure):
 
 libleargist.color_gist_scaletab.argtypes = (
     POINTER(GistColorImage), c_int, c_int, POINTER(c_int))
-libleargist.color_gist_scaletab.returntype = POINTER(c_float)
+libleargist.color_gist_scaletab.restype = c_void_p
 
 def color_gist(im, nblocks=4, orientations=(8, 8, 4)):
     """Compute the GIST descriptor of an RGB image"""

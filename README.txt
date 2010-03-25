@@ -67,6 +67,8 @@ the libsgd library: http://code.oliviergrisel.name/libsgd
 Changes
 -------
 
+- 1.1.0: 2010/03/25 - fix segmentation fault bug, thx to S. Campion
+
 - 1.0.1: 2009/10/10 - added missing missing MANIFEST
 
 - 1.0.0: 2009/10/10 - initial release
