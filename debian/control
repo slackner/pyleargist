@@ -1,0 +1,13 @@
+Source: pyleargist
+Section: python
+Priority: optional
+Maintainer: Sebastien Campion (scamp)
+Build-Depends: debhelper (>=7.0.0), python-support (>= 0.6), cdbs (>= 0.4.49), python-all-dev, fftw3-dev
+Standards-Version: 3.8.4
+
+Package: pyleargist
+Architecture: any
+Homepage: http://pypi.python.org/pypi/pyleargist/
+XB-Python-Version: ${python:Versions}
+Depends: fftw3, ${misc:Depends}, ${python:Depends}
+Description: GIST Image descriptor for scene recognition. Library to compute GIST global image descriptors to be used to compare pictures based on their content (to be used global scene recognition and categorization).The GIST image descriptor theoritical definition can be found on A. Torralba's page: http://people.csail.mit.edu/torralba/code/spatialenvelope/ The source code of the C implementation is included in the lear_gist subfolder. See http://lear.inrialpes.fr/software for the original project information. pyleargist is licensed under the GPL, the same license as the original C project.
