@@ -54,5 +54,7 @@ def color_gist(im, nblocks=4, orientations=(8, 8, 4)):
     addr= libleargist.color_gist_scaletab(
         pointer(gci), nblocks, scales,
         orientations.ctypes.data_as(POINTER(c_int)))
-    return np.ctypeslib.as_array(descriptors.from_address(addr))
+    d =  np.ctypeslib.as_array(descriptors.from_address(addr))
+    libleargist.free_desc(addr)
+    return d
 

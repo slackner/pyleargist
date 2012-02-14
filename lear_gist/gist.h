@@ -39,7 +39,7 @@ float *color_gist(color_image_t *src, int nblocks, int a, int b, int c);
 
 float *color_gist_scaletab(color_image_t *src, int nblocks, int n_scale, const int *n_orientations);
 
-
+void free_desc(float *d);
 
 
 #endif

@@ -978,6 +978,13 @@ float *color_gist_scaletab(color_image_t *src, int w, int n_scale, const int *n_
     return g;
 }
 
+
+void free_desc(float *d){
+  free(d);
+}
+/*--------------------------------------------------------------------------*/
+
+
 #ifndef STANDALONE_GIST
 
 /*--------------------------------------------------------------------------*/
@@ -1019,8 +1026,6 @@ local_desc_list_t *descriptor_color_gist_cpu(color_image_t *src, int a, int b, i
 
     return desc_list;
 }
-
-/*--------------------------------------------------------------------------*/
 
 #endif 
 
