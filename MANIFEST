@@ -10,4 +10,5 @@ lear_gist/gist.c
 lear_gist/gist.h
 lear_gist/standalone_image.c
 lear_gist/standalone_image.h
-src/leargist/__init__.py
+src/leargist.pyx
+src/leargist.pxd

@@ -1,4 +1,6 @@
-from distutils.core import setup, Extension
+from distutils.core import setup
+from distutils.extension import Extension
+from Cython.Distutils import build_ext
 import sys, os
 
 version = file('VERSION.txt').read().strip()
@@ -12,16 +14,19 @@ setup(name='pyleargist',
       author='Olivier Grisel',
       author_email='olivier.grisel@ensta.org',
       url='http://www.bitbucket.org/ogrisel/pyleargist/src/tip/',
-      license='GPL',
+      license='PSL',
       package_dir={'': 'src'},
-      packages=['leargist'],
+      #packages=['leargist'],
+      cmdclass = {"build_ext": build_ext},
       ext_modules=[
           Extension(
-              'leargist._gist', [
+              'leargist', [
                   'lear_gist/standalone_image.c',
                   'lear_gist/gist.c',
+                  'src/leargist.pyx',
               ],
               libraries=['m', 'fftw3f'],
+              include_dirs=['lear_gist',],
               extra_compile_args=['-DUSE_GIST', '-DSTANDALONE_GIST'],
           ),
       ],
