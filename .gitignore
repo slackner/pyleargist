@@ -11,3 +11,4 @@ include/*
 .coverage
 debug
 lear_gist/compute_gist
+src/leargist.c
